@@ -30,7 +30,6 @@ export const officerAPI = {
       headers: getHeaders()
     });
     const data = await res.json();
-    // console.log(data);
     return data;
   },
 
@@ -40,6 +39,20 @@ export const officerAPI = {
       headers: getHeaders(),
       body: JSON.stringify(data)
     });
+    return res.json();
+  },
+
+  analyzeRisk: async (payload) => {
+    const res = await fetch(`${BASE_URL}/officer/analyze-risk`, {
+      method: "POST",
+      headers: getHeaders(),
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) {
+      throw new Error(`Server error: ${res.status}`);
+    }
+
     return res.json();
   }
 };

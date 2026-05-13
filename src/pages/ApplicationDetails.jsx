@@ -476,14 +476,7 @@ export const ApplicationDetails = () => {
     };
 
     try {
-      const res = await fetch('/api/analyze-risk', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`Server error: ${res.status}`);
-      const json = await res.json();
-      // expected: { recommendation, confidence, risk_level, reasons }
+      const json = await officerAPI.analyzeRisk(payload);
       setAiResult(json);
     } catch (err) {
       setAnalyzeError(err.message || 'Analysis failed. Please try again.');
